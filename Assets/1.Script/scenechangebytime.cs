@@ -25,7 +25,10 @@ public class scenechangebytime : MonoBehaviour
     IEnumerator check()
     {
         yield return new WaitForSeconds(time-1f);
-        Fadeout.SetActive(true);
+        if (Fadeout != null)
+        {
+            Fadeout.SetActive(true);
+        }
         yield return new WaitForSeconds(2f);
         next();
 

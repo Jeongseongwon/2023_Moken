@@ -22,7 +22,7 @@ public class Change_next_2 : MonoBehaviour
     private float Distance_x;
     private float Distance_y;
 
-    private GameObject Game_manger;
+    public GameObject Audio_narr;
     //================ only for eye image =========================
     public GameObject eye_open_image_3;
     public GameObject eye_open_image_4;
@@ -32,12 +32,12 @@ public class Change_next_2 : MonoBehaviour
 
     private bool Check_for_end = false;
     public GameObject plane;
+    public GameObject Fadein_2;
+    public GameObject Fadeout;
+    public GameObject Fadeout_2;
     // Start is called before the first frame update
     void Start()
     {
-
-        Game_manger = GameObject.FindGameObjectWithTag("GameController");
-
     }
 
     // Update is called once per frame
@@ -67,7 +67,6 @@ public class Change_next_2 : MonoBehaviour
             if (mode_for_blink == true)
             {
                 Blink_eye();
-                Main_object.SetActive(false);
             }
             else if (mode_for_blink == false)
             {
@@ -89,11 +88,18 @@ public class Change_next_2 : MonoBehaviour
     }
     void Blink_eye()
     {
-        if (Check_for_eyeblink_temp == 0)
+        if(Temp_timer == 0 && Check_for_eyeblink_temp == 0)
         {
-            //Debug.Log("0000");
+            Fadeout.SetActive(true);
+            Main_object.SetActive(false);
+        }
+        if (Temp_timer > 2f && Check_for_eyeblink_temp == 0)
+        {
+            Fadeout.SetActive(false);
+            Audio_narr.GetComponent<AudioSource>().Play();
             eye_open_image_4.SetActive(true);
             eye_open_image_3.SetActive(false);
+            Fadein_2.SetActive(true);
             Temp_timer = 0f;
             Check_for_eyeblink_temp++;
         }
@@ -120,8 +126,8 @@ public class Change_next_2 : MonoBehaviour
             }
             else if (Check_for_eyeblink_temp == 3)
             {
-                Scene_End();
-                //Debug.Log("2222");
+                Fadeout_2.SetActive(true);
+                Invoke("Scene_End", 2f);
             }
         }
 

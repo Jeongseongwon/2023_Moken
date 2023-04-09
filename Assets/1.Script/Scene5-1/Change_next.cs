@@ -8,6 +8,10 @@ public class Change_next : MonoBehaviour
     [Header("======== Main and target object  ======== ")]
     public GameObject Main_object;
     public GameObject Target_object;
+    public GameObject Fadein;
+    public GameObject Fadein_2;
+    public GameObject Fadeout;
+    public GameObject Fadeout_2;
 
     [Header("======== Now and next movement  ======== ")]
     public GameObject Now_mov;
@@ -16,11 +20,10 @@ public class Change_next : MonoBehaviour
     [Header("======== Mode X = true, Y= false  ======== ")]
     //mode x,y ����?
     public bool mode;
-    public bool mode_for_blink=false;
+    public bool mode_for_blink = false;
 
     private float Distance;
 
-    private GameObject Game_manger;
     //================ only for eye image =========================
     public GameObject eye_open_image_3;
     public GameObject eye_open_image_4;
@@ -35,37 +38,40 @@ public class Change_next : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (Fadein != null)
+        {
+            Fadein.SetActive(true);
+        }
 
-        Game_manger = GameObject.FindGameObjectWithTag("GameController");
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+
         if (mode == true)
         {
             Distance = Main_object.GetComponent<RectTransform>().position.x - Target_object.GetComponent<Transform>().position.x;
         }
-        else if(mode == false)
+        else if (mode == false)
         {
             Distance = Main_object.GetComponent<RectTransform>().position.y - Target_object.GetComponent<Transform>().position.y;
-        }        
+        }
         //Debug.Log(Distance);
 
-        if (Distance > -1 && Distance <1)
+        if (Distance > -1 && Distance < 1)
         {
             //Debug.Log("HIT!!!!!!!!");
             Check_for_end = true;
             //눈 뜬 이미지로 변경
         }
 
-        if(Check_for_end == true)
+        if (Check_for_end == true)
         {
-            
+
             if (mode_for_blink == true)
             {
+                Fadeout.SetActive(true);
                 Blink_eye();
                 Main_object.SetActive(false);
             }
@@ -83,25 +89,25 @@ public class Change_next : MonoBehaviour
     void Scene_End()
     {
         //Debug.Log("Scene End");
-       // SceneManager.LoadScene("5-2.Earth");
+        // SceneManager.LoadScene("5-2.Earth");
         Now_mov.SetActive(false);
         Next_mov.SetActive(true);
     }
     void Blink_eye()
     {
-        if(Check_for_eyeblink_temp == 0)
+        if (Temp_timer > 2f && Check_for_eyeblink_temp == 0)
         {
-                //Debug.Log("0000");
-                eye_open_image_4.SetActive(true);
-                eye_open_image_3.SetActive(false);
-                Temp_timer = 0f;
-                Check_for_eyeblink_temp++;
+            Fadeout.SetActive(false);
+            Fadein_2.SetActive(true);
+            eye_open_image_4.SetActive(true);
+            eye_open_image_3.SetActive(false);
+            Temp_timer = 0f;
+            Check_for_eyeblink_temp++;
         }
         Temp_timer += Time.deltaTime;
         if (Temp_timer > 4.0f)
         {
-            
-            if (Check_for_eyeblink_temp==2)
+            if (Check_for_eyeblink_temp == 2)
             {   //눈 뜬 이미지로 변경
                 //Debug.Log("0000");
                 eye_open_image_4.SetActive(true);
@@ -109,7 +115,7 @@ public class Change_next : MonoBehaviour
                 Temp_timer = 0f;
                 Check_for_eyeblink_temp++;
             }
-            else if(Check_for_eyeblink_temp == 1)
+            else if (Check_for_eyeblink_temp == 1)
             {   //눈 감은 이미지로 변경
                 //Debug.Log("1111");
                 eye_open_image_4.SetActive(false);
@@ -117,12 +123,14 @@ public class Change_next : MonoBehaviour
                 Temp_timer = 0f;
                 Check_for_eyeblink_temp++;
 
-            }else if (Check_for_eyeblink_temp == 3)
+            }
+            else if (Check_for_eyeblink_temp == 3)
             {
-                Scene_End();
+                Fadeout_2.SetActive(true);
+                Invoke("Scene_End", 2f);
                 //Debug.Log("2222");
             }
         }
-        
+
     }
 }

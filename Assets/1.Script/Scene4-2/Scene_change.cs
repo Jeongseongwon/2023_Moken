@@ -13,7 +13,8 @@ public class Scene_change : MonoBehaviour
     private bool Check_for_eyeblink;
     private int Check_for_eyeblink_temp = 0;
 
-
+    public GameObject Fadeout;
+    public GameObject Fadein;
 
     private float Temp_timer;
 
@@ -30,11 +31,10 @@ public class Scene_change : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        temp_timer += Time.deltaTime;
-
         if (Check_for_eyeblink == true)
         {
             Blink_eye();
+            Fadein.SetActive(true);
         }
 
 
@@ -70,17 +70,10 @@ public class Scene_change : MonoBehaviour
             }
             else if (Check_for_eyeblink_temp == 2)
             {
+                Fadeout.SetActive(true);
+                Invoke("Scene_End", 2f);
+                //Debug.Log("2222");
 
-                eye_open_image_4.SetActive(true);
-                eye_open_image_3.SetActive(false);
-                Temp_timer = 0f;
-                Check_for_eyeblink_temp++;
-
-            }
-            else if (Check_for_eyeblink_temp == 3)
-            {
-                Scene_End();
-                Debug.Log("2222");
             }
         }
     }

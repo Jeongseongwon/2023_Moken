@@ -20,6 +20,8 @@ public class Eveblick_2 : MonoBehaviour
     private float Temp_timer = 0;
     private bool Check_for_eyeblink = false;
 
+    public GameObject Fadeout;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -65,8 +67,9 @@ public class Eveblick_2 : MonoBehaviour
             }
             else if (Check_for_eyeblink_temp == 2)
             {
-
-                Scene_End();
+                Fadeout.SetActive(true);
+                Invoke("Scene_End", 2f);
+                //Scene_End();
                 Debug.Log("2222");
 
             }

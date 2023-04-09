@@ -49,6 +49,7 @@ public class Landolt_game : MonoBehaviour
     private float button_timer=0f;
 
     private GameObject Audio_bgm;
+    public GameObject Audio_narr;
     // Start is called before the first frame update
     void Start()
     {
@@ -98,6 +99,7 @@ public class Landolt_game : MonoBehaviour
         {
             //Debug.Log("check_sound_effect");
             Audio_bgm.GetComponent<AudioSource>().volume = 0.03f;
+            Audio_narr.GetComponent<AudioSource>().Play();
             sound_object.GetComponent<AudioSource>().Play();
             Check_for_endsound = true;
         }

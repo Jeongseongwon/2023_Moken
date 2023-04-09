@@ -21,6 +21,8 @@ public class eyeblick : MonoBehaviour
     private float Temp_timer = 0;
     private bool Check_for_eyeblink = false;
 
+    public GameObject Fadeout;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +50,7 @@ public class eyeblick : MonoBehaviour
         {
             if (Check_for_eyeblink_temp == 1)
             {   //눈 뜬 이미지로 변경
-                Debug.Log("0000");
+               // Debug.Log("0000");
                 eye_open_image_3.SetActive(true);
                 eye_open_image_4.SetActive(false);
 
@@ -57,7 +59,7 @@ public class eyeblick : MonoBehaviour
             }
             else if (Check_for_eyeblink_temp == 0)
             {   //눈 감은 이미지로 변경
-                Debug.Log("1111");
+                //Debug.Log("1111");
                 eye_open_image_4.SetActive(true);
                 eye_open_image_3.SetActive(false);
                 Temp_timer = 0f;
@@ -66,9 +68,9 @@ public class eyeblick : MonoBehaviour
             }
             else if (Check_for_eyeblink_temp == 2)
             {
-
-                Scene_End();
-                Debug.Log("2222");
+                Fadeout.SetActive(true);
+                Invoke("Scene_End", 2f);
+                //Debug.Log("2222");
 
             }
         }

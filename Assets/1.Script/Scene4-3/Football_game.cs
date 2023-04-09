@@ -60,21 +60,24 @@ public class Football_game : MonoBehaviour
 
     //============== target position object =======================
     public GameObject Position_seq0;
-    private GameObject Game_manger;
+    public GameObject Game_manger;
 
     //============== effect object =======================
     private GameObject[] Effect_position;
 
-    private GameObject sound_object;
+    public GameObject Audio_end;
+    public GameObject Audio_narr;
     private bool Check_for_endsound = false;
     private float button_timer = 0f;
+
+    public GameObject Fadein;
+    public GameObject Fadeout;
+    public GameObject Fadeout_2;
     // Start is called before the first frame update
     void Start()
     {
         //Initialize
-        Game_manger = GameObject.FindGameObjectWithTag("GameController");
         Effect_position = GameObject.FindGameObjectsWithTag("Effect");
-        sound_object = GameObject.FindGameObjectWithTag("End_sound");
 
         Status_chapter = 0;
         Check_for_movement = false;
@@ -110,8 +113,13 @@ public class Football_game : MonoBehaviour
         if (check_firstscreen == true)
         {
             float temp_timer = Game_manger.GetComponent<Timer>().Get_time();
+            if (temp_timer > 6f)
+            {
+                Fadeout.SetActive(true);
+            }
             if (temp_timer > 8f)
             {
+                Fadein.SetActive(true);
                 First_screen.SetActive(false);
                 check = true;
                 check_firstscreen = false;
@@ -142,7 +150,8 @@ public class Football_game : MonoBehaviour
         if (Check_for_endsound == false && Game_manger.GetComponent<Timer>().Get_time() > 50f)
         {
             Audio_bgm.GetComponent<AudioSource>().volume = 0.03f;
-            sound_object.GetComponent<AudioSource>().Play();
+            Audio_end.GetComponent<AudioSource>().Play();
+            Audio_narr.GetComponent<AudioSource>().Play();
             Check_for_endsound = true;
         }
     }
@@ -213,7 +222,8 @@ public class Football_game : MonoBehaviour
 
                 if (Game_manger.GetComponent<Timer>().Get_time() > 60f)
                 {
-                    Scene_End();
+                    Fadeout_2.SetActive(true);
+                    Invoke("Scene_End", 2f);
                     check = false;
                 }
                 else

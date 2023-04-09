@@ -22,8 +22,10 @@ public class niddlelerpmove : MonoBehaviour
     public GameObject eye_open_image_4;
     private bool Check_for_eyeblink;
     private int Check_for_eyeblink_temp=0;
-  
 
+    public GameObject Fadein;
+    public GameObject Fadeout;
+    public GameObject Fadeout_2;
 
     private float Temp_timer;
 
@@ -47,7 +49,10 @@ public class niddlelerpmove : MonoBehaviour
         move();
         if (Check_for_eyeblink == true)
         {
+            Fadein.SetActive(true);
             Blink_eye();
+            //Fadeout.SetActive(true);
+            //Invoke("Blink_eye", 2f); 
         }
 
     }
@@ -114,20 +119,19 @@ public class niddlelerpmove : MonoBehaviour
             {
                 flag = false;
                 nowdegree = 0;
-                Debug.Log("Check_1");
+               // Debug.Log("Check_1");
                 check_seq++;
             }
 
         }
         else
         {
-            
             if ((niddledgreeend[count] + nowdegree) >= niddlerdgreestart[count])
             {
                 
                 flag = false;
                 nowdegree = 0;
-                Debug.Log("Check_2");
+               // Debug.Log("Check_2");
                 check_seq++;
             }
 
@@ -149,7 +153,7 @@ public class niddlelerpmove : MonoBehaviour
     {
         if (Check_for_eyeblink_temp == 0)
         {   //눈 뜬 이미지로 변경
-            Debug.Log("0000");
+           // Debug.Log("0000");
             eye_open_image_4.SetActive(true);
             eye_open_image_3.SetActive(false);
             Temp_timer = 0f;
@@ -161,7 +165,7 @@ public class niddlelerpmove : MonoBehaviour
         {
             if(Check_for_eyeblink_temp == 1)
             {   //눈 감은 이미지로 변경
-                Debug.Log("1111");
+               // Debug.Log("1111");
                 eye_open_image_4.SetActive(false);
                 eye_open_image_3.SetActive(true);
                 Temp_timer = 0f;
@@ -178,8 +182,10 @@ public class niddlelerpmove : MonoBehaviour
             }
             else if (Check_for_eyeblink_temp == 3)
             {
-                Scene_End();
-                Debug.Log("2222");
+                
+                Fadeout_2.SetActive(true);
+                Invoke("Scene_End", 2f);
+               // Debug.Log("2222");
             }
         }
     }

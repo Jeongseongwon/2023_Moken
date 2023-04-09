@@ -9,6 +9,7 @@ public class scenechangebytime : MonoBehaviour
     public float time;
 
     private GameObject Audio_bgm;
+    public GameObject Fadeout;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +24,9 @@ public class scenechangebytime : MonoBehaviour
     }
     IEnumerator check()
     {
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(time-1f);
+        Fadeout.SetActive(true);
+        yield return new WaitForSeconds(2f);
         next();
 
     }

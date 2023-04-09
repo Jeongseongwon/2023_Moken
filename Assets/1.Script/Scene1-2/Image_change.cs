@@ -25,6 +25,7 @@ public class Image_change : MonoBehaviour
     public GameObject eye_open_image_2;
     public GameObject eye_open_image_3;
     public GameObject eye_open_image_4;
+    public GameObject Basecanvas;
     private bool Check_for_eyeblink;
     private int Check_for_eyeblink_temp=0;
   
@@ -107,6 +108,7 @@ public class Image_change : MonoBehaviour
         }
         if (Check_for_eyeblink == true)
         {
+            Basecanvas.SetActive(false);
             Blink_eye();
         }
 

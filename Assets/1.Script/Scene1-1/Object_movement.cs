@@ -61,6 +61,7 @@ public class Object_movement : MonoBehaviour
 
     private GameObject Audio_bgm;
     public GameObject nextonject;
+    public GameObject Fadeout;
     // Start is called before the first frame update
     void Start()
     {
@@ -108,8 +109,8 @@ public class Object_movement : MonoBehaviour
         {
             //Blink_eye();
             //다음 오브젝트로 활성화
-            nextonject.SetActive(true);
-            this.gameObject.SetActive(false);
+            Invoke("Scene_End", 2f);
+            Fadeout.SetActive(true);
         }
 
 
@@ -123,7 +124,8 @@ public class Object_movement : MonoBehaviour
 
     void Scene_End()
     {
-        SceneManager.LoadScene("1-2.Image",LoadSceneMode.Single);
+        nextonject.SetActive(true);
+        this.gameObject.SetActive(false);
     }
 
     void Scene_setting()

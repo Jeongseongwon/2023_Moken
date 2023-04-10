@@ -61,6 +61,7 @@ public class Numbergame : MonoBehaviour
     public GameObject Audio_narr;
     private bool Check_for_endsound = false;
 
+    public GameObject nowscene;
     public GameObject nextscene;
 
     public GameObject[] Effect_position;
@@ -116,6 +117,7 @@ public class Numbergame : MonoBehaviour
                 First_screen.SetActive(false);
                 check = true;
                 Fadein.SetActive(true);
+                Fadeout_1.SetActive(false);
             }
         }
 
@@ -187,8 +189,6 @@ public class Numbergame : MonoBehaviour
 
     void Scene_start()
     {
-        //check = true;
-        //Debug.Log("Scene start");
         Check_for_movement = true;
     }
 
@@ -197,7 +197,9 @@ public class Numbergame : MonoBehaviour
         //Debug.Log("Scene End");
         //nextscene.SetActive(true);
         //this.gameObject.SetActive(false);
-        SceneManager.LoadScene("Chapter_1");
+        nowscene.SetActive(false);
+        nextscene.SetActive(true);
+        //SceneManager.LoadScene("Chapter_1");
     }
 
     void Scene_setting()
@@ -206,7 +208,7 @@ public class Numbergame : MonoBehaviour
         if (Game_manger != null)
         {
             Status_chapter = Game_manger.GetComponent<Game_manger>().Get_nchapter();
-            Debug.Log("check status chapter : " + Status_chapter);
+            //Debug.Log("check status chapter : " + Status_chapter);
         }
 
         if (Check_for_answer == true)
@@ -242,7 +244,7 @@ public class Numbergame : MonoBehaviour
             Position_seq[4].SetActive(false);
             Position_seq[5].SetActive(false);
             Get_child(Position_seq[0]);
-            Debug.Log("Route_0 START");
+           //Debug.Log("Route_0 START");
 
         }
         else if (temp_num == 1)
@@ -254,7 +256,7 @@ public class Numbergame : MonoBehaviour
             Position_seq[4].SetActive(false);
             Position_seq[5].SetActive(false);
             Get_child(Position_seq[1]);
-            Debug.Log("Route_1 START");
+            //Debug.Log("Route_1 START");
         }
         else if (temp_num == 2)
         {
@@ -265,7 +267,7 @@ public class Numbergame : MonoBehaviour
             Position_seq[4].SetActive(false);
             Position_seq[5].SetActive(false);
             Get_child(Position_seq[2]);
-            Debug.Log("Route_2 START");
+            //Debug.Log("Route_2 START");
         }
         else if (temp_num == 3)
         {
@@ -276,7 +278,7 @@ public class Numbergame : MonoBehaviour
             Position_seq[4].SetActive(false);
             Position_seq[5].SetActive(false);
             Get_child(Position_seq[3]);
-            Debug.Log("Route_3 START");
+            //Debug.Log("Route_3 START");
         }
         else if (temp_num == 4)
         {
@@ -287,7 +289,7 @@ public class Numbergame : MonoBehaviour
             Position_seq[4].SetActive(true);
             Position_seq[5].SetActive(false);
             Get_child(Position_seq[4]);
-            Debug.Log("Route_4 START");
+           // Debug.Log("Route_4 START");
         }
         else if (temp_num == 5)
         {
@@ -298,7 +300,7 @@ public class Numbergame : MonoBehaviour
             Position_seq[4].SetActive(false);
             Position_seq[5].SetActive(true);
             Get_child(Position_seq[5]);
-            Debug.Log("Route_5 START");
+            //Debug.Log("Route_5 START");
         }
     }
     void Get_child(GameObject Parent_obj)
@@ -306,7 +308,7 @@ public class Numbergame : MonoBehaviour
         Targetposition_obj_list.Clear();
         //Save all target gameobject from parent object in the list
         Only_access_obj = Parent_obj.GetComponent<Transform>();
-        Debug.Log("number of child : " + Only_access_obj.childCount);
+        //Debug.Log("number of child : " + Only_access_obj.childCount);
 
         for (int i = 0; i < Only_access_obj.childCount; i++)
         {
@@ -321,7 +323,7 @@ public class Numbergame : MonoBehaviour
     {
         if (Check_seq_target % 2 == 0)
         {
-            Debug.Log(Check_seq_target);
+            //Debug.Log(Check_seq_target);
             Test_obj_transform.position = Targetposition_obj_list[Check_seq_target].GetComponent<RectTransform>().position;
         }
         Flag_1 = false;
@@ -352,11 +354,11 @@ public class Numbergame : MonoBehaviour
             //End of target, change to next chapter
             if (Check_seq_target == Numberofchild - 1)
             {
-                Debug.Log("Chapter End");
+               // Debug.Log("Chapter End");
                 Game_manger.GetComponent<Game_manger>().Go_next_chapter();
                 Status_chapter = Game_manger.GetComponent<Game_manger>().Get_nchapter();
 
-                if (Status_chapter == 15)    //2단계로 바뀔 때 뭔가 설정이 더 필요함
+                if (Status_chapter == 25)    //2단계로 바뀔 때 뭔가 설정이 더 필요함
                 {
                     Scene_End();
                     check = false;
@@ -374,18 +376,10 @@ public class Numbergame : MonoBehaviour
             {
                 Check_seq_target++;
                 Check_for_movement = true;
-                Debug.Log("Change to next target / toward " + Check_seq_target);
+                //Debug.Log("Change to next target / toward " + Check_seq_target);
                 Flag_1 = true;
             }
         }
 
     }
 }
-
-//추가되어야 하는 기능
-
-// 눈깜박임 표시 집어넣기
-
-//연속 이동하려면 어떻게 해야하나?
-//이런 기능도 있으면 좋겠는데
-

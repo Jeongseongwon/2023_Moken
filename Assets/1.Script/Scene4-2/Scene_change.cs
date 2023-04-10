@@ -53,7 +53,7 @@ public class Scene_change : MonoBehaviour
         {
             if (Check_for_eyeblink_temp == 0)
             {   //눈 뜬 이미지로 변경
-                Debug.Log("0000");
+                //Debug.Log("0000");
                 eye_open_image_4.SetActive(true);
                 eye_open_image_3.SetActive(false);
                 Temp_timer = 0f;
@@ -61,7 +61,7 @@ public class Scene_change : MonoBehaviour
             }
             else if (Check_for_eyeblink_temp == 1)
             {   //눈 감은 이미지로 변경
-                Debug.Log("1111");
+                //Debug.Log("1111");
                 eye_open_image_4.SetActive(false);
                 eye_open_image_3.SetActive(true);
                 Temp_timer = 0f;

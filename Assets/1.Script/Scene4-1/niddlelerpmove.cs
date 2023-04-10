@@ -63,8 +63,8 @@ public class niddlelerpmove : MonoBehaviour
         if (timer > waitingTime)
         {
 
-            Debug.Log(count);
-            Debug.Log(niddlerdgreestart[count]);
+            //Debug.Log(count);
+            //Debug.Log(niddlerdgreestart[count]);
             if (check_seq == 1)
             {
                 spin.GetComponent<RectTransform>().Rotate(0, 0, 60, Space.Self);

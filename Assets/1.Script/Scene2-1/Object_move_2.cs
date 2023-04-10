@@ -56,7 +56,7 @@ public class Object_move_2 : MonoBehaviour
     public GameObject Position_seq0;
     public GameObject Position_seq1;
     public GameObject Position_seq2;
-    private GameObject Game_manger;
+    public GameObject Game_manger;
 
 
     //================ only for eye image =========================
@@ -72,17 +72,21 @@ public class Object_move_2 : MonoBehaviour
     //================ only for fade =========================
     private float fadeTime = 1f;
 
-    private GameObject Audio_bgm;
+    public GameObject Audio_bgm;
+    public GameObject Audio_Narr;
     public GameObject nextscene;
     public GameObject nowscene;
 
     public GameObject Fadeout;
+    public GameObject Fadein;
+    public GameObject Fadeout_2;
+
+    public GameObject Fadein_first;
+    public GameObject Fadeout_first;
     // Start is called before the first frame update
     void Start()
     {
         //Initialize
-        Game_manger = GameObject.FindGameObjectWithTag("GameController");
-        Audio_bgm = GameObject.FindGameObjectWithTag("BGM");
         Status_chapter = 0;
         Check_for_movement = false;
         Check_seq_target = 0;
@@ -107,8 +111,14 @@ public class Object_move_2 : MonoBehaviour
         {
 
             float temp_timer = Game_manger.GetComponent<Timer>().Get_time();
+            if (temp_timer > 6f)
+            {
+                Fadeout_first.SetActive(true);
+            }
             if (temp_timer > 8f)
             {
+                Fadeout_first.SetActive(false);
+                Fadein_first.SetActive(true);
                 Audio_bgm.GetComponent<AudioSource>().volume = 0.1f;
                 First_screen.SetActive(false);
                 check = true;
@@ -120,7 +130,7 @@ public class Object_move_2 : MonoBehaviour
 
         if (Check_for_eyeblink == true)
         {
-            Blink_eye();
+            Blink_eye(); 
         }
 
         if (Check_for_stop == true)
@@ -160,7 +170,7 @@ public class Object_move_2 : MonoBehaviour
             Position_seq1.SetActive(false);
             Position_seq2.SetActive(false);
             Get_child(Position_seq0);
-            Debug.Log("Chapter_0 START");
+            //Debug.Log("Chapter_0 START");
             Main_object.GetComponent<Image>().sprite = image_1;
             Speed_obj = 750f;
             Main_object.GetComponent<RectTransform>().position = Targetposition_obj_list[0].GetComponent<RectTransform>().position;
@@ -172,7 +182,7 @@ public class Object_move_2 : MonoBehaviour
             Position_seq1.SetActive(true);
             Position_seq2.SetActive(false);
             Get_child(Position_seq1);
-            Debug.Log("Chapter_1 START");
+            //Debug.Log("Chapter_1 START");
             Main_object.GetComponent<Image>().sprite = image_2;
             Speed_obj = 750f;
             Main_object.GetComponent<RectTransform>().position = Targetposition_obj_list[0].GetComponent<RectTransform>().position;
@@ -184,7 +194,7 @@ public class Object_move_2 : MonoBehaviour
             Position_seq1.SetActive(false);
             Position_seq2.SetActive(true);
             Get_child(Position_seq2);
-            Debug.Log("Chapter_2 START");
+            //Debug.Log("Chapter_2 START");
             Main_object.GetComponent<Image>().sprite = image_3;
             Speed_obj = 750f;
             Main_object.GetComponent<RectTransform>().position = Targetposition_obj_list[0].GetComponent<RectTransform>().position;
@@ -192,14 +202,23 @@ public class Object_move_2 : MonoBehaviour
         else if (Status_chapter == 3)
         {
             //Scene_End();
-            eye_open_image_4.SetActive(true);
             Audio_bgm.GetComponent<AudioSource>().volume = 0.03f;
-            Check_for_eyeblink = true;
-            check = false;
+            check = false; 
+            Fadeout_2.SetActive(true);
+            Audio_Narr.SetActive(true);
+            Invoke("Fadein_fuinc", 2f);
         }
         Check_seq_target = 0;
         Game_manger.GetComponent<Game_manger>().Go_next_chapter();
         tem_check = false;
+    }
+
+    void Fadein_fuinc()
+    {
+        eye_open_image_4.SetActive(true);
+        Fadeout_2.SetActive(false);
+        Fadein.SetActive(true);
+        Check_for_eyeblink = true;
     }
     void Get_child(GameObject Parent_obj)
     {

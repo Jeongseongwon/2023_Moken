@@ -43,8 +43,8 @@ public class niddlelerpmove_2 : MonoBehaviour
         if (timer > waitingTime)
         {
 
-            Debug.Log(count);
-            Debug.Log(niddlerdgreestart[count]);
+            //Debug.Log(count);
+            //Debug.Log(niddlerdgreestart[count]);
             if (check_seq == 1)
             {
                 //spin.GetComponent<RectTransform>().Rotate(0, 0, 180, Space.Self);
@@ -62,14 +62,14 @@ public class niddlelerpmove_2 : MonoBehaviour
     }
     void Scene_End()
     {
-        Debug.Log("Scene End");
+        //Debug.Log("Scene End");
         nextobject_blink.SetActive(true);
         //nextobject.SetActive(true);
         nowobject.SetActive(false);
     }
     void rotate()
     {
-        if (check_seq == 0 )
+        if (check_seq == 0)
         {
             spin.GetComponent<RectTransform>().Rotate(0, 0, +Time.deltaTime * rotateSpeed, Space.Self);
         }
@@ -90,7 +90,7 @@ public class niddlelerpmove_2 : MonoBehaviour
             {
                 flag = false;
                 nowdegree = 0;
-                Debug.Log("Check_1");
+                //Debug.Log("Check_1");
                 check_seq++;
             }
 
@@ -103,7 +103,7 @@ public class niddlelerpmove_2 : MonoBehaviour
 
                 flag = false;
                 nowdegree = 0;
-                Debug.Log("Check_2");
+                //Debug.Log("Check_2");
                 check_seq++;
             }
 

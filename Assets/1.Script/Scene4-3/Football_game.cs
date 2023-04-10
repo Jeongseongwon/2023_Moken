@@ -85,7 +85,7 @@ public class Football_game : MonoBehaviour
 
         Test_obj_transform = Main_object.GetComponent<RectTransform>();
         Football_obj_transform = Football_object.GetComponent<RectTransform>();
-        Debug.Log(Football_obj_transform.position);
+        //Debug.Log(Football_obj_transform.position);
         Scene_setting();
         Scene_start();
     }

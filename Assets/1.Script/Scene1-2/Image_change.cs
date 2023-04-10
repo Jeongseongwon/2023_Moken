@@ -18,9 +18,9 @@ public class Image_change : MonoBehaviour
     [Header("======== System variation ======== ")]
 
 
-    private GameObject Image_object;
-    private GameObject fader;
-    private GameObject Game_manger;
+    public GameObject Image_object;
+    public GameObject fader;
+    public GameObject Game_manger;
     public GameObject eye_open_image_1;
     public GameObject eye_open_image_2;
     public GameObject eye_open_image_3;
@@ -36,20 +36,18 @@ public class Image_change : MonoBehaviour
     private int Status_chapter;
     private bool Check_for_fade;
 
-    private GameObject Audio_bgm;
+    public GameObject Audio_bgm;
     public GameObject nextscene;
     public GameObject nowscene;
     public GameObject Fadeout;
+    public GameObject Fadeout_first;
+    
     // Start is called before the first frame update
     void Start()
     {
         //Initialize
         
         Sprite_image = Resources.LoadAll<Sprite>("2. Background");
-        Audio_bgm = GameObject.FindGameObjectWithTag("BGM");
-        Image_object = GameObject.Find("Main_image");
-        Game_manger = GameObject.FindGameObjectWithTag("GameController");
-        fader = GameObject.Find("Fade");
 
         Temp_timer = 9f;
         Status_chapter = 0;
@@ -99,8 +97,13 @@ public class Image_change : MonoBehaviour
         else if (check == false)
         {
             float temp_timer = Game_manger.GetComponent<Timer>().Get_time();
+            if (temp_timer > 6f)
+            {
+                Fadeout_first.SetActive(true);
+            }
             if (temp_timer > 8f)
             {
+                Fadeout_first.SetActive(false);
                 First_screen.SetActive(false);
                 Audio_bgm.GetComponent<AudioSource>().volume = 0.1f;
                 check = true;

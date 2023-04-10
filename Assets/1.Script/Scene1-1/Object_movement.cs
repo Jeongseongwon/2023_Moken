@@ -50,7 +50,7 @@ public class Object_movement : MonoBehaviour
     public GameObject Position_seq0;
     public GameObject Position_seq1;
     public GameObject Position_seq2;
-    private GameObject Game_manger;
+    public GameObject Game_manger;
 
   
     //================ only for eye image =========================
@@ -59,18 +59,17 @@ public class Object_movement : MonoBehaviour
     private int Check_for_eyeblink_temp=0;
     private float Temp_timer = 0;
 
-    private GameObject Audio_bgm;
+    public GameObject Audio_bgm;
     public GameObject nextonject;
     public GameObject Fadeout;
+
+    public GameObject Fadeout_first;
+    public GameObject Fadein_first;
     // Start is called before the first frame update
     void Start()
     {
         //Initialize
         //여기에서 오디오 소스 실행
-
-        Game_manger = GameObject.FindGameObjectWithTag("GameController");
-
-        Audio_bgm = GameObject.FindGameObjectWithTag("BGM");
         Status_chapter = 0;
         Check_for_movement = false;
         Check_seq_target = 0;
@@ -97,8 +96,15 @@ public class Object_movement : MonoBehaviour
         else if (check == false)
         {
             float temp_timer = Game_manger.GetComponent<Timer>().Get_time();
+            if (temp_timer > 6f)
+            {
+                Fadeout_first.SetActive(true);
+                
+            }
             if (temp_timer > 8f)
             {
+                Fadeout_first.SetActive(false);
+                Fadein_first.SetActive(true);
                 First_screen.SetActive(false);
                 Audio_bgm.GetComponent<AudioSource>().volume = 0.1f;
                 check = true;
@@ -196,7 +202,7 @@ public class Object_movement : MonoBehaviour
     {
             if (Check_seq_target % 2 == 0)
             {
-                Debug.Log(Check_seq_target);
+                //Debug.Log(Check_seq_target);
                 Test_obj_transform.position = Targetposition_obj_list[Check_seq_target+1].GetComponent<RectTransform>().position;
             }
         Flag_1 = false;

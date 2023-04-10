@@ -15,7 +15,7 @@ public class Landolt_game : MonoBehaviour
 
     [Header("======== Source image ======== ")]
     public Sprite[] Sprite_image;
-    private GameObject Game_manger;
+    public GameObject Game_manger;
 
     [Header("======== System variation ======== ")]
     public float Limit_time = 4;
@@ -30,7 +30,7 @@ public class Landolt_game : MonoBehaviour
 
     private int Check_score = 0;
 
-    private GameObject sound_object;
+    public GameObject Audio_End;
     private RectTransform Test_obj_transform;
     private Transform Only_access_obj;
     private int Number_rand_formove;
@@ -48,14 +48,12 @@ public class Landolt_game : MonoBehaviour
 
     private float button_timer=0f;
 
-    private GameObject Audio_bgm;
+    public GameObject Audio_bgm;
     public GameObject Audio_narr;
     // Start is called before the first frame update
     void Start()
     {
-        Game_manger = GameObject.FindGameObjectWithTag("GameController");
-        Audio_bgm = GameObject.FindGameObjectWithTag("BGM");
-        sound_object = GameObject.FindGameObjectWithTag("End_sound");
+
         Sprite_image = Resources.LoadAll<Sprite>("3.Landolt");
 
         Test_obj_transform = Main_object.GetComponent<RectTransform>();
@@ -100,7 +98,7 @@ public class Landolt_game : MonoBehaviour
             //Debug.Log("check_sound_effect");
             Audio_bgm.GetComponent<AudioSource>().volume = 0.03f;
             Audio_narr.GetComponent<AudioSource>().Play();
-            sound_object.GetComponent<AudioSource>().Play();
+            Audio_End.GetComponent<AudioSource>().Play();
             Check_for_endsound = true;
         }
 

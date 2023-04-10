@@ -187,7 +187,7 @@ public class Fruit_game : MonoBehaviour
     {
      
         //check = true;
-        Debug.Log("Scene start");
+        //Debug.Log("Scene start");
         Check_for_movement = true;
     }
 
@@ -239,7 +239,7 @@ public class Fruit_game : MonoBehaviour
             Position_seq[4].SetActive(false);
             Position_seq[5].SetActive(false);
             Get_child(Position_seq[0]);
-            Debug.Log("Route_0 START");
+            //Debug.Log("Route_0 START");
 
         }
         else if (temp_num == 1)
@@ -251,7 +251,7 @@ public class Fruit_game : MonoBehaviour
             Position_seq[4].SetActive(false);
             Position_seq[5].SetActive(false);
             Get_child(Position_seq[1]);
-            Debug.Log("Route_1 START");
+            //Debug.Log("Route_1 START");
         }
         else if (temp_num == 2)
         {
@@ -262,7 +262,7 @@ public class Fruit_game : MonoBehaviour
             Position_seq[4].SetActive(false);
             Position_seq[5].SetActive(false);
             Get_child(Position_seq[2]);
-            Debug.Log("Route_2 START");
+            //Debug.Log("Route_2 START");
         }
         else if (temp_num == 3)
         {
@@ -273,7 +273,7 @@ public class Fruit_game : MonoBehaviour
             Position_seq[4].SetActive(false);
             Position_seq[5].SetActive(false);
             Get_child(Position_seq[3]);
-            Debug.Log("Route_3 START");
+           // Debug.Log("Route_3 START");
         }
         else if (temp_num == 4)
         {
@@ -284,7 +284,7 @@ public class Fruit_game : MonoBehaviour
             Position_seq[4].SetActive(true);
             Position_seq[5].SetActive(false);
             Get_child(Position_seq[4]);
-            Debug.Log("Route_4 START");
+            //Debug.Log("Route_4 START");
         }
         else if (temp_num == 5)
         {
@@ -295,7 +295,7 @@ public class Fruit_game : MonoBehaviour
             Position_seq[4].SetActive(false);
             Position_seq[5].SetActive(true);
             Get_child(Position_seq[5]);
-            Debug.Log("Route_5 START");
+           // Debug.Log("Route_5 START");
         }
     }
     void Get_child(GameObject Parent_obj)
@@ -303,7 +303,7 @@ public class Fruit_game : MonoBehaviour
         Targetposition_obj_list.Clear();
         //Save all target gameobject from parent object in the list
         Only_access_obj = Parent_obj.GetComponent<Transform>();
-        Debug.Log("number of child : " + Only_access_obj.childCount);
+       // Debug.Log("number of child : " + Only_access_obj.childCount);
 
         for (int i = 0; i < Only_access_obj.childCount; i++)
         {
@@ -349,7 +349,7 @@ public class Fruit_game : MonoBehaviour
             //End of target, change to next chapter
             if (Check_seq_target == Numberofchild - 1)
             {
-                Debug.Log("Chapter End");
+                //Debug.Log("Chapter End");
                 Game_manger.GetComponent<Game_manger>().Go_next_chapter();
                 Status_chapter = Game_manger.GetComponent<Game_manger>().Get_nchapter();
 
@@ -373,7 +373,7 @@ public class Fruit_game : MonoBehaviour
             {
                 Check_seq_target++;
                 Check_for_movement = true;
-                Debug.Log("Change to next target / toward " + Check_seq_target);
+                //Debug.Log("Change to next target / toward " + Check_seq_target);
                 Flag_1 = true;
             }
         }

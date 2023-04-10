@@ -16105,6 +16105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer_setting: 0
   Limit_time: 0
+  Temp_timer: 0
 --- !u!4 &1877094641
 Transform:
   m_ObjectHideFlags: 0

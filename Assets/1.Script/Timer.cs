@@ -11,7 +11,7 @@ public class Timer : MonoBehaviour
     public bool timer_setting;
     public float Limit_time;
 
-    private float Temp_timer;
+    public float Temp_timer;
     // Start is called before the first frame update
     void Start()
     {

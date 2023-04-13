@@ -73,6 +73,7 @@ public class Football_game : MonoBehaviour
     public GameObject Fadein;
     public GameObject Fadeout;
     public GameObject Fadeout_2;
+    public GameObject End_text;
     // Start is called before the first frame update
     void Start()
     {
@@ -94,8 +95,8 @@ public class Football_game : MonoBehaviour
     void Update()
     {
         button_timer += Time.deltaTime;
-        //if (Input.GetKeyDown(KeyCode.JoystickButton0) && button_timer > 1f)
-        if (Input.GetKeyDown(KeyCode.Space)&& button_timer >1f)
+        if (Input.GetKeyDown(KeyCode.JoystickButton0) && button_timer > 1f)
+        //if (Input.GetKeyDown(KeyCode.Space)&& button_timer >1f)
         {
             check_shot = true;
             button_timer = 0f;
@@ -147,12 +148,18 @@ public class Football_game : MonoBehaviour
 
         }
 
-        if (Check_for_endsound == false && Game_manger.GetComponent<Timer>().Get_time() > 50f)
+        if (Check_for_endsound == false && Game_manger.GetComponent<Timer>().Get_time() > 45f)
         {
             Audio_bgm.GetComponent<AudioSource>().volume = 0.03f;
-            Audio_end.GetComponent<AudioSource>().Play();
-            Audio_narr.GetComponent<AudioSource>().Play();
+            Audio_end.SetActive(true);
             Check_for_endsound = true;
+        }
+        if (Check_for_endsound == true && Game_manger.GetComponent<Timer>().Get_time() > 53f)
+        {
+            Audio_narr.SetActive(true);
+            End_text.SetActive(true);
+            Check_for_endsound = false;
+            //텍스트 활성화
         }
     }
     void Scene_start()

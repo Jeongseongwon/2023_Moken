@@ -26,6 +26,8 @@ public class Landolt_game : MonoBehaviour
 
     public GameObject score_board;
     public GameObject Fadeout;
+    public GameObject Fadein_first;
+    public GameObject Fadeout_first;
 
 
     private int Check_score = 0;
@@ -50,6 +52,7 @@ public class Landolt_game : MonoBehaviour
 
     public GameObject Audio_bgm;
     public GameObject Audio_narr;
+    public GameObject End_text;
     // Start is called before the first frame update
     void Start()
     {
@@ -85,21 +88,33 @@ public class Landolt_game : MonoBehaviour
         else if (check == false)
         {
             float temp_timer = Game_manger.GetComponent<Timer>().Get_time();
+            if (temp_timer > 6f)
+            {
+                Fadeout_first.SetActive(true);
+            }
             if (temp_timer > 8f)
             {
                 First_screen.SetActive(false);
+                Fadeout_first.SetActive(false);
+                Fadein_first.SetActive(true);
                 Audio_bgm.GetComponent<AudioSource>().volume = 0.1f;
                 check = true;
             }
         }
-
-        if(Check_for_endsound == false && Game_manger.GetComponent<Timer>().Get_time() > 45f)
+        
+        if (Check_for_endsound == false && Game_manger.GetComponent<Timer>().Get_time() > 45f)
         {
             //Debug.Log("check_sound_effect");
             Audio_bgm.GetComponent<AudioSource>().volume = 0.03f;
-            Audio_narr.GetComponent<AudioSource>().Play();
-            Audio_End.GetComponent<AudioSource>().Play();
+            Audio_End.SetActive(true);
             Check_for_endsound = true;
+        }
+        if (Check_for_endsound == true && Game_manger.GetComponent<Timer>().Get_time() > 53f)
+        {
+            Audio_narr.SetActive(true);
+            End_text.SetActive(true);
+            Check_for_endsound = false;
+            //텍스트 활성화
         }
 
     }

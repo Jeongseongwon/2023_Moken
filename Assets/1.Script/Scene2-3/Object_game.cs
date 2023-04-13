@@ -30,11 +30,14 @@ public class Object_game : MonoBehaviour
     public GameObject score_board;
     public GameObject prefab;
     public GameObject Fadeout;
+    public GameObject Fadein_first;
+    public GameObject Fadeout_first;
+    public GameObject Fadein;
 
 
     private float Distance;
 
-    private GameObject Game_manger;
+    public GameObject Game_manger;
     private int Check_chapter;
 
     private bool check = false;
@@ -42,18 +45,18 @@ public class Object_game : MonoBehaviour
     private float temp_timer = 0;
     private int Check_score = 0;
 
-    private GameObject sound_object;
+    public GameObject Audio_end;
     private bool Check_for_endsound = false;
     public GameObject Audio_bgm;
+    public GameObject Audio_narr;
 
     private float button_timer = 0f;
+    public GameObject End_text;
     // Start is called before the first frame update
     void Start()
     {
 
         Application.targetFrameRate = 120;
-        Game_manger = GameObject.FindGameObjectWithTag("GameController");
-        sound_object = GameObject.FindGameObjectWithTag("End_sound");
 
         Check_chapter = 0;
 
@@ -76,6 +79,13 @@ public class Object_game : MonoBehaviour
             float temp_timer = Game_manger.GetComponent<Timer>().Get_time();
             if (temp_timer > 6f)
             {
+                Fadeout_first.SetActive(true);
+                //Debug.Log("First screen");
+            }
+            if (temp_timer > 8f)
+            {
+                Fadeout_first.SetActive(false);
+                Fadein_first.SetActive(true);
                 //Debug.Log("First screen");
                 First_screen.SetActive(false);
                 Audio_bgm.GetComponent<AudioSource>().volume = 0.1f;
@@ -88,8 +98,15 @@ public class Object_game : MonoBehaviour
         {
             //Debug.Log("check_sound_effect");
             Audio_bgm.GetComponent<AudioSource>().volume = 0.03f;
-            sound_object.GetComponent<AudioSource>().Play();
+            Audio_end.SetActive(true);
             Check_for_endsound = true;
+        }
+        if (Check_for_endsound == true && Game_manger.GetComponent<Timer>().Get_time() > 53f)
+        {
+            Audio_narr.SetActive(true);
+            End_text.SetActive(true);
+            Check_for_endsound = false;
+            //텍스트 활성화
         }
 
     }
@@ -104,8 +121,8 @@ public class Object_game : MonoBehaviour
             Change_path();
             temp_timer = 0;
         }
-        //if (Input.GetKeyDown(KeyCode.JoystickButton0) && button_timer > 1f)
-        if (Input.GetKeyDown(KeyCode.Space)&& button_timer >1f)
+        if (Input.GetKeyDown(KeyCode.JoystickButton0) && button_timer > 1f)
+        //if (Input.GetKeyDown(KeyCode.Space)&& button_timer >1f)
         {
             Distance = Main_object_0.GetComponent<Transform>().position.x - Main_object_1.GetComponent<Transform>().position.x;//이 값을 조금 바꿔야겟다
             if (Distance < 10 && Distance > -10)

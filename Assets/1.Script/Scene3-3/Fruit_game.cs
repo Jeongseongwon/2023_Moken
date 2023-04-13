@@ -65,6 +65,7 @@ public class Fruit_game : MonoBehaviour
     public GameObject Fadein;
     public GameObject Fadeout_1;
     public GameObject Fadeout_2;
+    public GameObject End_text;
 
     // Start is called before the first frame update
     void Start()
@@ -116,8 +117,8 @@ public class Fruit_game : MonoBehaviour
             }
         }
 
-        //if (Input.GetKeyDown(KeyCode.JoystickButton0)&& button_timer>1f)
-        if(Input.GetKeyDown(KeyCode.Space)&& button_timer > 1f)
+        if (Input.GetKeyDown(KeyCode.JoystickButton0)&& button_timer>1f)
+        //if(Input.GetKeyDown(KeyCode.Space)&& button_timer > 1f)
         {
            
             Distance =Main_object.GetComponent<RectTransform>().position.y - Target_object.GetComponent<RectTransform>().position.y;
@@ -136,14 +137,20 @@ public class Fruit_game : MonoBehaviour
             button_timer = 0f;
         }
 
-        if (Check_for_endsound == false && Game_manger.GetComponent<Timer>().Get_time() > 50f)
+        if (Check_for_endsound == false && Game_manger.GetComponent<Timer>().Get_time() > 45f)
         {
             //Debug.Log("check_sound_effect");
 
             Audio_bgm.GetComponent<AudioSource>().volume = 0.03f;
-            Audio_narr.GetComponent<AudioSource>().Play();
-            Audio_end.GetComponent<AudioSource>().Play();
+            Audio_end.SetActive(true);
             Check_for_endsound = true;
+        }
+        if (Check_for_endsound == true && Game_manger.GetComponent<Timer>().Get_time() > 53f)
+        {
+            Audio_narr.SetActive(true);
+            End_text.SetActive(true);
+            Check_for_endsound = false;
+            //텍스트 활성화
         }
 
     }
